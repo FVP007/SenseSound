@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SenseSound - Histórico</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 pb-20">
+
+    <div class="container mx-auto px-4 py-8 max-w-md">
+        <header class="flex items-center mb-8">
+            <h1 class="ml-3 text-2xl font-bold text-gray-800">Histórico Completo</h1>
+        </header>
+
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+            <h2 class="text-lg font-semibold mb-4">Eventos Recentes</h2>
+            <ul class="space-y-3">
+                <li class="p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Alarme de Despertador</span>
+                    <p class="text-sm text-gray-500">Ativado em: 07:00</p>
+                </li>
+                <li class="p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Som Detectado: Campainha</span>
+                    <p class="text-sm text-gray-500">Horário: 14:30</p>
+                </li>
+                <li class="p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Alarme de Lembrete</span>
+                    <p class="text-sm text-gray-500">Ativado em: 12:00</p>
+                </li>
+                <li class="p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Som Detectado: Alarme de incêndio</span>
+                    <p class="text-sm text-gray-500">Horário: 11:15</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <nav class="fixed bottom-0 w-full bg-white border-t">
+        <div class="container mx-auto max-w-md">
+            <div class="flex justify-around">
+                <a href="index.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <span class="text-xs mt-1">Início</span>
+                </a>
+                <a href="historico.html" class="py-3 px-2 text-blue-600 focus:outline-none flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span class="text-xs mt-1">Histórico</span>
+                </a>
+                <a href="alarmes.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="text-xs mt-1">Alarmes</span>
+                </a>
+                <a href="emergencia.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <span class="text-xs mt-1">Emergência</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
