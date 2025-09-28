@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,39 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @keyframes vibrate {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-2px); }
-            40% { transform: translateX(2px); }
-            60% { transform: translateX(-2px); }
-            80% { transform: translateX(2px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-2px);
+            }
+
+            40% {
+                transform: translateX(2px);
+            }
+
+            60% {
+                transform: translateX(-2px);
+            }
+
+            80% {
+                transform: translateX(2px);
+            }
         }
+
         .vibration-test {
             animation: vibrate 0.3s linear infinite;
         }
+
         .hidden {
             display: none;
         }
     </style>
 </head>
+
 <body class="bg-gray-100 pb-20">
 
     <div class="container mx-auto px-4 py-8 max-w-md">
@@ -33,11 +53,13 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Nome do Alarme</label>
-                    <input type="text" placeholder="Ex: Alarme do Despertador" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2">
+                    <input id="alarm-name" type="text" placeholder="Ex: Alarme do Despertador"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Período de Alerta</label>
-                    <select id="periodo-alerta" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2">
+                    <select id="periodo-alerta"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2">
                         <option>Sempre</option>
                         <option>Somente à noite (22h - 07h)</option>
                         <option value="personalizado">Personalizado</option>
@@ -47,11 +69,13 @@
                 <div id="personalizado-fields" class="hidden">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Horário</label>
-                        <input type="time" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2">
+                        <input id="alarm-time" type="time"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Período para tocar</label>
-                        <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2">
+                        <select id="alarm-repeat"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2">
                             <option>Uma vez</option>
                             <option>Todos os dias</option>
                             <option>Dias da semana (seg-sex)</option>
@@ -62,44 +86,22 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Tipo de Vibração</label>
-                    <select id="vibration-type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2">
+                    <select id="vibration-type"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm px-3 py-2">
                         <option value="curta">Curta e rápida</option>
                         <option value="longa">Longa e contínua</option>
                         <option value="intermitente">Intermitente</option>
                     </select>
                 </div>
                 <div class="flex justify-center">
-                    <button id="test-vibration-btn" class="py-2 px-4 bg-gray-200 rounded-lg text-gray-800 font-medium hover:bg-gray-300 transition-colors">
+                    <button id="test-vibration-btn"
+                        class="py-2 px-4 bg-gray-200 rounded-lg text-gray-800 font-medium hover:bg-gray-300 transition-colors">
                         Testar Vibração
                     </button>
                 </div>
-                <a href="historico.html" class="w-full block text-center py-2 bg-blue-600 text-white rounded-lg font-medium">Salvar Alarme</a>
+                <button id="save-alarm-btn" class="w-full py-2 bg-blue-600 text-white rounded-lg font-medium">Salvar
+                    Alarme</button>
             </div>
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-            <h2 class="text-lg font-semibold mb-4">Alarmes Salvos</h2>
-            <ul class="space-y-3" id="lista-alarmes">
-                <li class="p-3 bg-gray-50 rounded-lg flex justify-between items-center">
-                    <div>
-                        <h3 class="font-medium">Alarme do Despertador</h3>
-                        <p class="text-sm text-gray-500">Horário: 07:00 | Todos os dias</p>
-                        <p class="text-sm text-gray-500">Vibração: Curta e rápida</p>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button class="text-blue-600 edit-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                            </svg>
-                        </button>
-                        <button class="text-red-600 remove-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                        </button>
-                    </div>
-                </li>
-            </ul>
         </div>
     </div>
 
@@ -107,43 +109,51 @@
         <div class="container mx-auto max-w-md">
             <div class="flex justify-around">
                 <a href="index.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     <span class="text-xs mt-1">Início</span>
                 </a>
                 <a href="historico.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     <span class="text-xs mt-1">Histórico</span>
                 </a>
                 <a href="alarmes.html" class="py-3 px-2 text-blue-600 focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span class="text-xs mt-1">Alarmes</span>
                 </a>
                 <a href="emergencia.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                     <span class="text-xs mt-1">Emergência</span>
                 </a>
             </div>
         </div>
     </nav>
-    
+
     <script>
-        document.getElementById('test-vibration-btn').addEventListener('click', function() {
+        document.getElementById('test-vibration-btn').addEventListener('click', function () {
             const button = this;
             button.classList.add('vibration-test');
             setTimeout(() => {
                 button.classList.remove('vibration-test');
-            }, 1500); 
+            }, 1500);
         });
 
-        document.getElementById('periodo-alerta').addEventListener('change', function() {
+        document.getElementById('periodo-alerta').addEventListener('change', function () {
             const personalizadoFields = document.getElementById('personalizado-fields');
             if (this.value === 'personalizado') {
                 personalizadoFields.classList.remove('hidden');
@@ -152,22 +162,48 @@
             }
         });
     </script>
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.remove-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    if (confirm('Tem certeza que deseja remover este alarme?')) {
-                        event.target.closest('li').remove();
-                    }
-                });
-            });
-            document.querySelectorAll('.edit-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    alert('Funcionalidade de edição em desenvolvimento. Um formulário de edição seria exibido aqui.');
-                });
-            });
+        const saveButton = document.getElementById('save-alarm-btn');
+        const alarmNameInput = document.getElementById('alarm-name');
+        const periodoAlertaSelect = document.getElementById('periodo-alerta');
+        const customFields = document.getElementById('personalizado-fields');
+        const timeInput = document.getElementById('alarm-time');
+        const repeatSelect = document.getElementById('alarm-repeat');
+        const vibrationTypeSelect = document.getElementById('vibration-type');
+
+        function loadAlarms() {
+            const alarms = JSON.parse(localStorage.getItem('alarms')) || [];
+            return alarms;
+        }
+
+        function saveAlarms(alarms) {
+            localStorage.setItem('alarms', JSON.stringify(alarms));
+        }
+
+        saveButton.addEventListener('click', () => {
+            const newAlarm = {
+                id: Date.now(),
+                name: alarmNameInput.value || 'Novo Alarme',
+                periodo: periodoAlertaSelect.value,
+                horario: periodoAlertaSelect.value === 'personalizado' ? timeInput.value : null,
+                repeticao: periodoAlertaSelect.value === 'personalizado' ? repeatSelect.value : null,
+                vibracao: vibrationTypeSelect.value
+            };
+            const alarms = loadAlarms();
+            alarms.push(newAlarm);
+            saveAlarms(alarms);
+            alert('Alarme salvo com sucesso!');
+            window.location.href = 'historico.html';
+        });
+
+        periodoAlertaSelect.addEventListener('change', function () {
+            if (this.value === 'personalizado') {
+                customFields.classList.remove('hidden');
+            } else {
+                customFields.classList.add('hidden');
+            }
         });
     </script>
 </body>
+
 </html>
