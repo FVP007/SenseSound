@@ -1,41 +1,64 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SenseSound - Emergência</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hidden-section {
+            display: none;
+        }
+        @keyframes vibrate {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-2px); }
+            40% { transform: translateX(2px); }
+            60% { transform: translateX(-2px); }
+            80% { transform: translateX(2px); }
+        }
+        .vibration-test {
+            animation: vibrate 0.3s linear infinite;
+        }
+        .dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        .active-nav-btn {
+            color: #2563eb;
+        }
+        .inactive-nav-btn {
+            color: #6b7280;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 pb-20">
+<body class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 pb-20 transition-colors duration-300">
 
     <div class="container mx-auto px-4 py-8 max-w-md">
+        <button id="theme-toggle" class="fixed top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+        </button>
         <header class="flex items-center mb-8">
-            <h1 class="ml-3 text-2xl font-bold text-gray-800">Emergência</h1>
+            <h1 class="ml-3 text-2xl font-bold text-gray-800 dark:text-gray-100">Emergência</h1>
         </header>
 
-        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-            <h2 class="text-lg font-semibold mb-4">Seus Contatos</h2>
-            <div class="space-y-3">
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                            </svg>
-                        </div>
-                        <div class="ml-3">
-                            <h3 class="font-medium">Maria Silva</h3>
-                            <p class="text-sm text-gray-500">Mãe</p>
-                        </div>
-                    </div>
-                    <button class="text-red-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                    </button>
+        <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6">
+            <h2 class="text-lg font-semibold mb-4">Adicionar Novo Contato</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Nome</label>
+                    <input id="contact-name" type="text" placeholder="Nome do Contato" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700">
                 </div>
-
-                <button class="w-full py-2 text-blue-600 border border-blue-600 rounded-lg font-medium flex items-center justify-center mt-2">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Função (ex: Mãe)</label>
+                    <input id="contact-role" type="text" placeholder="Ex: Mãe, Irmão, Amigo" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Telefone</label>
+                    <input id="contact-phone" type="tel" placeholder="(00) 00000-0000" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700">
+                </div>
+                <button id="add-contact-btn" class="w-full py-2 text-blue-600 dark:text-blue-200 border border-blue-600 dark:border-blue-400 rounded-lg font-medium flex items-center justify-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
@@ -43,10 +66,16 @@
                 </button>
             </div>
         </div>
+
+        <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6">
+            <h2 class="text-lg font-semibold mb-4">Contatos Salvos</h2>
+            <ul class="space-y-3" id="contact-list">
+                </ul>
+        </div>
         
         <a href="ajustes.html" class="block">
-            <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-                <h2 class="text-lg font-semibold flex items-center justify-between text-gray-800">
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6">
+                <h2 class="text-lg font-semibold flex items-center justify-between text-gray-800 dark:text-gray-100">
                     Ajustes do Aplicativo
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -56,28 +85,28 @@
         </a>
     </div>
 
-    <nav class="fixed bottom-0 w-full bg-white border-t">
+    <nav class="fixed bottom-0 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
         <div class="container mx-auto max-w-md">
             <div class="flex justify-around">
-                <a href="index.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
+                <a href="index.html" class="py-3 px-2 inactive-nav-btn focus:outline-none flex flex-col items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     <span class="text-xs mt-1">Início</span>
                 </a>
-                <a href="historico.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
+                <a href="historico.html" class="py-3 px-2 inactive-nav-btn focus:outline-none flex flex-col items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     <span class="text-xs mt-1">Histórico</span>
                 </a>
-                <a href="alarmes.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
+                <a href="alarmes.html" class="py-3 px-2 inactive-nav-btn focus:outline-none flex flex-col items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span class="text-xs mt-1">Alarmes</span>
                 </a>
-                <a href="emergencia.html" class="py-3 px-2 text-blue-600 focus:outline-none flex flex-col items-center">
+                <a href="emergencia.html" class="py-3 px-2 active-nav-btn focus:outline-none flex flex-col items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
@@ -86,5 +115,100 @@
             </div>
         </div>
     </nav>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const contactNameInput = document.getElementById('contact-name');
+            const contactRoleInput = document.getElementById('contact-role');
+            const contactPhoneInput = document.getElementById('contact-phone');
+            const addContactBtn = document.getElementById('add-contact-btn');
+            const contactList = document.getElementById('contact-list');
+
+            function loadContacts() {
+                const contacts = JSON.parse(localStorage.getItem('emergencyContacts')) || [];
+                return contacts;
+            }
+
+            function saveContacts(contacts) {
+                localStorage.setItem('emergencyContacts', JSON.stringify(contacts));
+            }
+
+            function renderContacts() {
+                contactList.innerHTML = '';
+                const contacts = loadContacts();
+                
+                if (contacts.length === 0) {
+                    const emptyMessage = document.createElement('p');
+                    emptyMessage.className = 'text-center text-gray-500 dark:text-gray-400';
+                    emptyMessage.textContent = 'Nenhum contato de emergência salvo.';
+                    contactList.appendChild(emptyMessage);
+                    return;
+                }
+
+                contacts.forEach(contact => {
+                    const li = document.createElement('li');
+                    li.className = 'p-3 bg-gray-50 dark:bg-gray-700 rounded-lg flex justify-between items-center';
+                    li.innerHTML = `
+                        <div>
+                            <h3 class="font-medium">${contact.name}</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">${contact.role}</p>
+                            <p class="text-sm text-blue-600 dark:text-blue-400">${contact.phone}</p>
+                        </div>
+                        <button class="text-red-600 remove-btn" data-id="${contact.id}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    `;
+                    contactList.appendChild(li);
+                });
+                setupEventListeners();
+            }
+
+            function setupEventListeners() {
+                document.querySelectorAll('.remove-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        if (confirm('Tem certeza que deseja remover este contato?')) {
+                            const idToRemove = event.currentTarget.dataset.id;
+                            let contacts = loadContacts();
+                            contacts = contacts.filter(c => c.id != idToRemove);
+                            saveContacts(contacts);
+                            renderContacts();
+                        }
+                    });
+                });
+            }
+
+            addContactBtn.addEventListener('click', () => {
+                const newContact = {
+                    id: Date.now(),
+                    name: contactNameInput.value,
+                    role: contactRoleInput.value,
+                    phone: contactPhoneInput.value
+                };
+                if (newContact.name && newContact.phone) {
+                    const contacts = loadContacts();
+                    contacts.push(newContact);
+                    saveContacts(contacts);
+                    renderContacts();
+                    contactNameInput.value = '';
+                    contactRoleInput.value = '';
+                    contactPhoneInput.value = '';
+                } else {
+                    alert('Por favor, preencha o nome e o telefone.');
+                }
+            });
+
+            // Adiciona um exemplo de contato inicial se não houver nenhum
+            if (!localStorage.getItem('emergencyContacts')) {
+                const initialContacts = [
+                    { id: Date.now(), name: 'Maria Silva', role: 'Mãe', phone: '(11) 98765-4321' }
+                ];
+                saveContacts(initialContacts);
+            }
+
+            renderContacts();
+        });
+    </script>
 </body>
 </html>
