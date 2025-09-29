@@ -1,49 +1,152 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SenseSound - Início</title>
+    <title>SoundAlert - Início</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .hidden-section {
+            display: none;
+        }
+
+        @keyframes vibrate {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-2px);
+            }
+
+            40% {
+                transform: translateX(2px);
+            }
+
+            60% {
+                transform: translateX(-2px);
+            }
+
+            80% {
+                transform: translateX(2px);
+            }
+        }
+
+        .vibration-test {
+            animation: vibrate 0.3s linear infinite;
+        }
+
+        .dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        .active-nav-btn {
+            color: #2563eb;
+        }
+
+        .inactive-nav-btn {
+            color: #6b7280;
+        }
+
+        /* Estilos para a barra de intensidade */
+        .w-fraca {
+            width: 33.33%;
+        }
+
+        .w-media {
+            width: 66.66%;
+        }
+
+        .w-forte {
+            width: 100%;
+        }
+
+        /* Cores da barra */
+        .bg-cor-vermelho {
+            background-color: #ef4444;
+        }
+
+        .bg-cor-azul {
+            background-color: #3b82f6;
+        }
+
+        .bg-cor-verde {
+            background-color: #22c55e;
+        }
+
+        .bg-cor-amarelo {
+            background-color: #f59e0b;
+        }
+
+        .bg-cor-roxo {
+            background-color: #a855f7;
+        }
+
+        /* Cores do ícone */
+        .text-cor-vermelho {
+            color: #ef4444;
+        }
+
+        .text-cor-azul {
+            color: #3b82f6;
+        }
+
+        .text-cor-verde {
+            color: #22c55e;
+        }
+
+        .text-cor-amarelo {
+            color: #f59e0b;
+        }
+
+        .text-cor-roxo {
+            color: #a855f7;
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 pb-20">
-
+<body class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 pb-20 transition-colors duration-300">
+    <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6 text-center">
+        <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100">SoundAlert</h1>
+    </div>
     <div class="container mx-auto px-4 py-8 max-w-md">
-        <header class="flex items-center mb-8">
-            <h1 class="ml-3 text-2xl font-bold text-gray-800">Início</h1>
-        </header>
-
-        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-            <h2 class="text-lg font-semibold mb-4">Status da Pulseira</h2>
-            <div class="flex justify-between items-center mb-4">
-                <span class="text-gray-500 text-sm">Status:</span>
-                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Conectado</span>
-            </div>
-            <div class="grid grid-cols-2 gap-4 text-center">
-                <div>
-                    <p class="text-gray-500 text-sm">Bateria</p>
-                    <p class="font-bold">78%</p>
+        <div id="page-content">
+            <header class="flex items-center mb-8">
+                <h1 class="ml-3 text-2xl font-bold text-gray-800 dark:text-gray-100">Início</h1>
+            </header>
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6">
+                <h2 class="text-lg font-semibold mb-4">Status da Pulseira</h2>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-500 text-sm dark:text-gray-400">Status:</span>
+                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Conectado</span>
                 </div>
-                <div>
-                    <p class="text-gray-500 text-sm">Sons hoje</p>
-                    <p class="font-bold">24</p>
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div>
+                        <p class="text-gray-500 text-sm dark:text-gray-400">Bateria</p>
+                        <p class="font-bold">78%</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500 text-sm dark:text-gray-400">Sons hoje</p>
+                        <p class="font-bold">24</p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
-            <h2 class="text-lg font-semibold mb-4">Atividade Sonora</h2>
-            <canvas id="soundChart" height="150"></canvas>
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6">
+                <h2 class="text-lg font-semibold mb-4">Atividade Sonora</h2>
+                <canvas id="soundChart" height="150"></canvas>
+            </div>
         </div>
     </div>
 
-    <nav class="fixed bottom-0 w-full bg-white border-t">
+    <nav class="fixed bottom-0 w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
         <div class="container mx-auto max-w-md">
             <div class="flex justify-around">
-                <a href="index.html" class="py-3 px-2 text-blue-600 focus:outline-none flex flex-col items-center">
+                <a href="index.html" class="py-3 px-2 active-nav-btn focus:outline-none flex flex-col items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -51,7 +154,8 @@
                     </svg>
                     <span class="text-xs mt-1">Início</span>
                 </a>
-                <a href="historico.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
+                <a href="historico.html"
+                    class="py-3 px-2 inactive-nav-btn focus:outline-none flex flex-col items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -59,7 +163,7 @@
                     </svg>
                     <span class="text-xs mt-1">Histórico</span>
                 </a>
-                <a href="alarmes.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
+                <a href="alarmes.html" class="py-3 px-2 inactive-nav-btn focus:outline-none flex flex-col items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -77,7 +181,8 @@
                     </svg>
                     <span class="text-xs mt-1">Protótipo</span>
                 </a>
-                <a href="emergencia.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
+                <a href="emergencia.html"
+                    class="py-3 px-2 inactive-nav-btn focus:outline-none flex flex-col items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -99,30 +204,22 @@
                     datasets: [{
                         label: 'Alertas Hoje',
                         data: [12, 3, 5, 2],
-                        backgroundColor: [
-                            'rgba(59, 130, 246, 0.7)',
-                            'rgba(239, 68, 68, 0.7)',
-                            'rgba(34, 197, 94, 0.7)',
-                            'rgba(249, 115, 22, 0.7)',
-                        ],
+                        backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(239, 68, 68, 0.7)', 'rgba(34, 197, 94, 0.7)', 'rgba(249, 115, 22, 0.7)'],
                         borderWidth: 0
                     }]
                 },
                 options: {
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 1
-                            }
-                        }
+                        y: { beginAtZero: true, ticks: { stepSize: 1 } }
                     },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
+                    plugins: { legend: { display: false } }
                 }
+            });
+
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            themeToggleBtn.addEventListener('click', () => {
+                html.classList.toggle('dark');
             });
         });
     </script>

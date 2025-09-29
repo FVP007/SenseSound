@@ -1,44 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SenseSound - Emergência</title>
+    <title>SoundAlert - Emergência</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .hidden-section {
             display: none;
         }
+
         @keyframes vibrate {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-2px); }
-            40% { transform: translateX(2px); }
-            60% { transform: translateX(-2px); }
-            80% { transform: translateX(2px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-2px);
+            }
+
+            40% {
+                transform: translateX(2px);
+            }
+
+            60% {
+                transform: translateX(-2px);
+            }
+
+            80% {
+                transform: translateX(2px);
+            }
         }
+
         .vibration-test {
             animation: vibrate 0.3s linear infinite;
         }
+
         .dark {
             background-color: #1a202c;
             color: #e2e8f0;
         }
+
         .active-nav-btn {
             color: #2563eb;
         }
+
         .inactive-nav-btn {
             color: #6b7280;
         }
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 pb-20 transition-colors duration-300">
 
+<body class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 pb-20 transition-colors duration-300">
+    <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6 text-center">
+        <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100">SoundAlert</h1>
+    </div>
     <div class="container mx-auto px-4 py-8 max-w-md">
-        <button id="theme-toggle" class="fixed top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
-        </button>
         <header class="flex items-center mb-8">
             <h1 class="ml-3 text-2xl font-bold text-gray-800 dark:text-gray-100">Emergência</h1>
         </header>
@@ -48,19 +68,25 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Nome</label>
-                    <input id="contact-name" type="text" placeholder="Nome do Contato" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700">
+                    <input id="contact-name" type="text" placeholder="Nome do Contato"
+                        class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Função (ex: Mãe)</label>
-                    <input id="contact-role" type="text" placeholder="Ex: Mãe, Irmão, Amigo" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700">
+                    <input id="contact-role" type="text" placeholder="Ex: Mãe, Irmão, Amigo"
+                        class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-400">Telefone</label>
-                    <input id="contact-phone" type="tel" placeholder="(00) 00000-0000" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700">
+                    <input id="contact-phone" type="tel" placeholder="(00) 00000-0000"
+                        class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm px-3 py-2 bg-white dark:bg-gray-700">
                 </div>
-                <button id="add-contact-btn" class="w-full py-2 text-blue-600 dark:text-blue-200 border border-blue-600 dark:border-blue-400 rounded-lg font-medium flex items-center justify-center mt-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                <button id="add-contact-btn"
+                    class="w-full py-2 text-blue-600 dark:text-blue-200 border border-blue-600 dark:border-blue-400 rounded-lg font-medium flex items-center justify-center mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
                     Adicionar Contato
                 </button>
@@ -70,14 +96,15 @@
         <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6">
             <h2 class="text-lg font-semibold mb-4">Contatos Salvos</h2>
             <ul class="space-y-3" id="contact-list">
-                </ul>
+            </ul>
         </div>
-        
+
         <a href="ajustes.html" class="block">
             <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6">
                 <h2 class="text-lg font-semibold flex items-center justify-between text-gray-800 dark:text-gray-100">
                     Ajustes do Aplicativo
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </h2>
@@ -89,20 +116,27 @@
         <div class="container mx-auto max-w-md">
             <div class="flex justify-around">
                 <a href="index.html" class="py-3 px-2 inactive-nav-btn focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     <span class="text-xs mt-1">Início</span>
                 </a>
-                <a href="historico.html" class="py-3 px-2 inactive-nav-btn focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                <a href="historico.html"
+                    class="py-3 px-2 inactive-nav-btn focus:outline-none flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     <span class="text-xs mt-1">Histórico</span>
                 </a>
                 <a href="alarmes.html" class="py-3 px-2 inactive-nav-btn focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span class="text-xs mt-1">Alarmes</span>
                 </a>
@@ -116,16 +150,19 @@
                     </svg>
                     <span class="text-xs mt-1">Protótipo</span>
                 </a>
-                <a href="emergencia.html" class="py-3 px-2 active-nav-btn focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                <a href="emergencia.html"
+                    class="py-3 px-2 active-nav-btn focus:outline-none flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                     <span class="text-xs mt-1">Emergência</span>
                 </a>
             </div>
         </div>
     </nav>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             const contactNameInput = document.getElementById('contact-name');
@@ -146,7 +183,7 @@
             function renderContacts() {
                 contactList.innerHTML = '';
                 const contacts = loadContacts();
-                
+
                 if (contacts.length === 0) {
                     const emptyMessage = document.createElement('p');
                     emptyMessage.className = 'text-center text-gray-500 dark:text-gray-400';
@@ -221,4 +258,5 @@
         });
     </script>
 </body>
+
 </html>

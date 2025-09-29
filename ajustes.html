@@ -1,57 +1,86 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SenseSound - Ajustes do Aplicativo</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+
+        .active-nav-btn {
+            color: #2563eb;
+        }
+
+        .inactive-nav-btn {
+            color: #6b7280;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 pb-20">
+
+<body class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 pb-20 transition-colors duration-300">
+    <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6 text-center">
+        <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100">SoundAlert</h1>
+    </div>
 
     <div class="container mx-auto px-4 py-8 max-w-md">
+
         <header class="flex items-center mb-8">
             <a href="emergencia.html" class="mr-4 text-gray-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
             </a>
-            <h1 class="text-2xl font-bold text-gray-800">Ajustes do Aplicativo</h1>
+            <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Ajustes do Aplicativo</h1>
         </header>
 
-        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+        <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6">
             <h2 class="text-lg font-semibold mb-4">Opções Gerais</h2>
             <div class="space-y-4">
                 <div class="flex justify-between items-center">
-                    <span>Sensibilidade do microfone</span>
-                    <select class="border rounded-md px-3 py-1">
+                    <span class="dark:text-white">Sensibilidade do microfone</span>
+                    <select class="border rounded-md px-3 py-1 bg-white dark:bg-gray-700 dark:text-gray-100">
                         <option>Baixa</option>
                         <option selected>Média</option>
                         <option>Alta</option>
                     </select>
                 </div>
-                <button id="conectarDispositivo" class="w-full py-2 bg-blue-600 text-white rounded-lg font-medium">Conectar Novos Dispositivos</button>
+                <button id="conectarDispositivo" class="w-full py-2 bg-blue-600 text-white rounded-lg font-medium">
+                    Conectar Novos Dispositivos
+                </button>
             </div>
         </div>
     </div>
 
-    <nav class="fixed bottom-0 w-full bg-white border-t">
+    <nav class="fixed bottom-0 w-full bg-white dark:bg-gray-900 border-t">
         <div class="container mx-auto max-w-md">
             <div class="flex justify-around">
                 <a href="index.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     <span class="text-xs mt-1">Início</span>
                 </a>
                 <a href="historico.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     <span class="text-xs mt-1">Histórico</span>
                 </a>
                 <a href="alarmes.html" class="py-3 px-2 text-gray-500 focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span class="text-xs mt-1">Alarmes</span>
                 </a>
@@ -66,13 +95,25 @@
                     <span class="text-xs mt-1">Protótipo</span>
                 </a>
                 <a href="emergencia.html" class="py-3 px-2 text-blue-600 focus:outline-none flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                     <span class="text-xs mt-1">Emergência</span>
                 </a>
             </div>
         </div>
     </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const conectarBtn = document.getElementById('conectarDispositivo');
+            conectarBtn.addEventListener('click', () => {
+                alert('O produto final está em desenvolvimento e essa funcionalidade ainda não pode ser usada.');
+            });
+        });
+    </script>
 </body>
+
 </html>
