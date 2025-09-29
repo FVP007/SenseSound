@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="light">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,68 +7,36 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @keyframes vibrate {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            20% {
-                transform: translateX(-2px);
-            }
-
-            40% {
-                transform: translateX(2px);
-            }
-
-            60% {
-                transform: translateX(-2px);
-            }
-
-            80% {
-                transform: translateX(2px);
-            }
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-2px); }
+            40% { transform: translateX(2px); }
+            60% { transform: translateX(-2px); }
+            80% { transform: translateX(2px); }
         }
-
         .vibration-test {
             animation: vibrate 0.3s linear infinite;
         }
-
         .dark {
             background-color: #1a202c;
             color: #e2e8f0;
         }
-
         .active-nav-btn {
             color: #2563eb;
         }
-
         .inactive-nav-btn {
             color: #6b7280;
         }
-
         /* Estilos para a barra de intensidade */
-        .w-fraca {
-            width: 33.33%;
-        }
-
-        .w-media {
-            width: 66.66%;
-        }
-
-        .w-forte {
-            width: 100%;
-        }
-
+        .w-fraca { width: 33.33%; }
+        .w-media { width: 66.66%; }
+        .w-forte { width: 100%; }
         /* Estilo para o botão de cor selecionado */
         .color-selected {
             border-color: #3b82f6;
-            /* Azul do Tailwind, você pode ajustar */
             box-shadow: 0 0 0 2px #3b82f6;
         }
     </style>
 </head>
-
 <body class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 pb-20 transition-colors duration-300">
     <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-6 text-center">
         <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100">SoundAlert</h1>
@@ -255,14 +222,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            // Lógica do Modo Noturno
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const html = document.documentElement;
-            themeToggleBtn.addEventListener('click', () => {
-                html.classList.toggle('dark');
-            });
-
-            // Elementos do formulário
+            const saveButton = document.getElementById('save-alarm-btn');
             const alarmNameInput = document.getElementById('alarm-name');
             const colorOptions = document.getElementById('color-options');
             const vibrationIntensitySelect = document.getElementById('vibration-intensity');
@@ -270,12 +230,10 @@
             const vibrationDurationSelect = document.getElementById('vibration-duration');
             const vibrationQuantitySelect = document.getElementById('vibration-quantity');
             const testVibrationBtn = document.getElementById('test-vibration-btn');
-            const saveAlarmBtn = document.getElementById('save-alarm-btn');
+            
+            let selectedColor = 'red';
+            let selectedIcon = 'alerta';
 
-            let selectedColor = 'red'; // Cor padrão
-            let selectedIcon = 'alerta'; // Ícone padrão
-
-            // Lógica para selecionar cor e ícone
             colorOptions.querySelectorAll('button').forEach(button => {
                 button.addEventListener('click', function () {
                     colorOptions.querySelectorAll('button').forEach(btn => btn.classList.remove('color-selected'));
@@ -286,39 +244,40 @@
                 });
             });
 
-            // Atualiza a barra de intensidade visualmente
             const intensityMapping = {
                 'fraca': 'w-1/3',
                 'media': 'w-2/3',
                 'forte': 'w-full'
             };
 
+            const colorMapping = {
+                'red': 'red',
+                'blue': 'blue',
+                'green': 'green',
+                'yellow': 'yellow',
+                'purple': 'purple'
+            };
+
             function updateIntensityBarColor() {
-                intensityBar.className = `bg-${selectedColor}-600 h-2 rounded-full ${intensityMapping[vibrationIntensitySelect.value]}`;
+                const intensidade = vibrationIntensitySelect.value;
+                console.log(intensidade);
+                const intensidadeClass = intensityMapping[intensidade];
+                
+                const corDaBarra = colorMapping[selectedColor];
+                console.log(corDaBarra);
+                intensityBar.className = `bg-${corDaBarra}-500 h-2 rounded-full ${intensidadeClass}`;
             }
 
-            vibrationIntensitySelect.addEventListener('change', function () {
-                updateIntensityBarColor();
-            });
+            vibrationIntensitySelect.addEventListener('change', updateIntensityBarColor);
 
-            // Lógica para o botão Testar Vibração
-            // Dentro da sua função testVibrationBtn.addEventListener
             testVibrationBtn.addEventListener('click', function () {
                 const button = this;
-                const intensidade = vibrationIntensitySelect.value;
-                const duracao = parseInt(vibrationDurationSelect.value);
-                const quantidade = parseInt(vibrationQuantitySelect.value);
-
-                // Adiciona o efeito visual e executa a vibração
                 button.classList.add('vibration-test');
-                testarVibracao(intensidade, duracao, quantidade);
-
                 setTimeout(() => {
                     button.classList.remove('vibration-test');
-                }, 1500); // Exemplo de duração do efeito visual
+                }, 1500);
             });
 
-            // Lógica de salvamento no localStorage
             function loadEvents() {
                 const events = JSON.parse(localStorage.getItem('events')) || [];
                 return events;
@@ -328,12 +287,12 @@
                 localStorage.setItem('events', JSON.stringify(events));
             }
 
-            saveAlarmBtn.addEventListener('click', () => {
+            saveButton.addEventListener('click', () => {
                 const newAlarm = {
                     id: Date.now(),
                     name: alarmNameInput.value || 'Novo Alarme',
                     type: 'alarme',
-                    cor: selectedColor,
+                    cor: colorMapping[selectedColor],
                     icone: selectedIcon,
                     intensidade: vibrationIntensitySelect.value,
                     duracao: vibrationDurationSelect.value,
@@ -342,15 +301,13 @@
                 const events = loadEvents();
                 events.push(newAlarm);
                 saveEvents(events);
-                alert('Alarme salvo com sucesso! Redirecionando para o histórico...');
+                alert('Alarme salvo com sucesso!');
                 window.location.href = 'historico.html';
             });
 
-            // Inicializa a barra de intensidade e a seleção de cor
-            updateIntensityBarColor();
             colorOptions.querySelector(`[data-color="${selectedColor}"]`).classList.add('color-selected');
+            updateIntensityBarColor();
         });
     </script>
 </body>
-
 </html>
