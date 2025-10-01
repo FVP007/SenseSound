@@ -206,9 +206,7 @@
             if (!localStorage.getItem('events')) {
                 const initialEvents = [
                     { id: Date.now(), name: 'Alerta Matinal', type: 'alarme', cor: 'azul', icone: 'bell', intensidade: 'media', duracao: '2', quantidade: '3' },
-                    { id: Date.now() + 1, name: 'Lembrete de Medicamento', type: 'alarme', cor: 'verde', icone: 'check', intensidade: 'fraca', duracao: '1', quantidade: '1' },
-                    { id: Date.now() + 2, name: 'Som Detectado', type: 'som', info: 'Campainha', horario: '14:30' },
-                    { id: Date.now() + 3, name: 'Som Detectado', type: 'som', info: 'Alarme de incêndio', horario: '11:15' }
+                    { id: Date.now() + 1, name: 'Lembrete de Medicamento', type: 'alarme', cor: 'verde', icone: 'check', intensidade: 'fraca', duracao: '1', quantidade: '1' }
                 ];
                 saveEvents(initialEvents);
             }
